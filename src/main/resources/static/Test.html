@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<html>
+  <head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    var chartData;
+    $(function(){
+    	charData = [
+    	          ['Task', 'Hours per Day'],
+    	];
+    	
+    	
+    	$.getJSON("listMember",function(data){
+    		$.each(data,function(idx, m){
+    			charData.push([m.dname, m.cnt]);
+    		});
+    	 });
+    });
+    
+
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+    	  var data = google.visualization.arrayToDataTable(chartData);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+ <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
+</body>
+</html>
